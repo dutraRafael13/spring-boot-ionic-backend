@@ -39,6 +39,7 @@ public class Produto implements Serializable {
 	private List<Categoria> categorias;
 	
 	public Produto() {
+		super();
 		this.id = 0;
 		this.nome = "";
 		this.preco = 0.0;
