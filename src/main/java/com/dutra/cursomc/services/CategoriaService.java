@@ -7,16 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.dutra.cursomc.domain.Categoria;
 import com.dutra.cursomc.repositories.CategoriaRepository;
+import com.dutra.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
-	
+
 	@Autowired
 	private CategoriaRepository repository;
 
 	public Categoria buscar(Integer id) {
-		Optional<Categoria> categoria = repository.findById(id);
-		return categoria.orElse(null);
+		Optional<Categoria> obj = repository.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
-	
+
 }
