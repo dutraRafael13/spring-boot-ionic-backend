@@ -2,7 +2,9 @@ package com.dutra.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -38,12 +41,16 @@ public class Produto implements Serializable {
 	)
 	private List<Categoria> categorias;
 	
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemPedido> itens;
+	
 	public Produto() {
 		super();
 		this.id = 0;
 		this.nome = "";
 		this.preco = 0.0;
 		this.categorias = new ArrayList<>();
+		this.itens = new HashSet<>();
 	}
 
 	public Produto(Integer id, String nome, Double preco) {
@@ -52,6 +59,15 @@ public class Produto implements Serializable {
 		this.nome = nome;
 		this.preco = preco;
 		this.categorias = new ArrayList<>();
+		this.itens = new HashSet<>();
+	}
+	
+	public List<Pedido> getPedidos() {
+		List<Pedido> pedidos = new ArrayList<>();
+		for(ItemPedido itemPedido : itens) {
+			pedidos.add(itemPedido.getPedido());
+		}
+		return pedidos;
 	}
 
 	public Integer getId() {
@@ -84,6 +100,14 @@ public class Produto implements Serializable {
 
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
+	}
+
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
 	}
 
 	@Override
