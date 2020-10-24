@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.dutra.cursomc.domain.Cliente;
 import com.dutra.cursomc.domain.dto.ClienteDTO;
+import com.dutra.cursomc.domain.dto.ClienteNewDTO;
 import com.dutra.cursomc.services.ClienteService;
 
 @RestController
@@ -34,14 +35,14 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(cliente	);
 	}
 	
-//	@RequestMapping(method = RequestMethod.POST)
-//	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO categoriaDTO) {
-//		Cliente cliente = service.fromDTO(categoriaDTO);
-//		cliente = service.insert(cliente);
-//		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId())
-//				.toUri();
-//		return ResponseEntity.created(uri).build();
-//	}
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO clienteNewDTO) {
+		Cliente cliente = service.fromDTO(clienteNewDTO);
+		cliente = service.insert(cliente);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId())
+				.toUri();
+		return ResponseEntity.created(uri).build();
+	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO categoriaDTO, @PathVariable Integer id) {

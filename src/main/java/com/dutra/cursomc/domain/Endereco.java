@@ -22,7 +22,7 @@ public class Endereco implements Serializable {
 	private Integer id;
 	
 	@Column
-	private String logadouro;
+	private String logradouro;
 	
 	@Column
 	private String numero;
@@ -48,7 +48,7 @@ public class Endereco implements Serializable {
 	public Endereco() {
 		super();
 		this.id = 0;
-		this.logadouro = "";
+		this.logradouro = "";
 		this.numero = "";
 		this.complemento = "";
 		this.bairro = "";
@@ -61,7 +61,7 @@ public class Endereco implements Serializable {
 			Cliente cliente, Cidade cidade) {
 		super();
 		this.id = id;
-		this.logadouro = logadouro;
+		this.logradouro = logadouro;
 		this.numero = numero;
 		this.complemento = complemento;
 		this.bairro = bairro;
@@ -78,12 +78,12 @@ public class Endereco implements Serializable {
 		this.id = id;
 	}
 
-	public String getLogadouro() {
-		return logadouro;
+	public String getLogradouro() {
+		return logradouro;
 	}
 
-	public void setLogadouro(String logadouro) {
-		this.logadouro = logadouro;
+	public void setLogradouro(String logadouro) {
+		this.logradouro = logadouro;
 	}
 
 	public String getNumero() {
